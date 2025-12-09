@@ -2,21 +2,21 @@
 
 namespace App\Filament\Resources\DynamicQuestionnaires\Schemas;
 
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\View;
-use Filament\Forms\Form;
-use Filament\Forms\Get;
+use Filament\Schemas\Components\View;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Utilities\Get;
 use Illuminate\Support\Str;
 
 class DynamicQuestionnaireForm
 {
-    public static function configure(Form $form): Form
+    public static function configure(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Section::make('Basic Information')
                     ->schema([
@@ -179,14 +179,15 @@ class DynamicQuestionnaireForm
                     ->columns(1)
                     ->collapsible(),
                 
-                Section::make('Preview')
-                    ->description('Preview your questionnaire structure')
-                    ->schema([
-                        View::make('filament.components.questionnaire-preview')
-                            ->visible(fn (Get $get): bool => !empty($get('structure'))),
-                    ])
-                    ->collapsed()
-                    ->collapsible(),
+                // Comment out or remove the Preview section until you create the view file
+                // Section::make('Preview')
+                //     ->description('Preview your questionnaire structure')
+                //     ->schema([
+                //         View::make('filament.components.questionnaire-preview')
+                //             ->visible(fn (Get $get): bool => !empty($get('structure'))),
+                //     ])
+                //     ->collapsed()
+                //     ->collapsible(),
             ]);
     }
 }
