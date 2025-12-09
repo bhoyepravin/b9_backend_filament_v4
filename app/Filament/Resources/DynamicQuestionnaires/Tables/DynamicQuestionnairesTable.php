@@ -10,14 +10,13 @@ use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
-// Add these imports
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\BulkAction;
-use Filament\Tables\Actions\CreateAction;
+// In Filament v4.0, actions are in the Filament\Actions namespace
+use Filament\Actions\Action;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\BulkAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 
 class DynamicQuestionnairesTable
 {
@@ -102,7 +101,7 @@ class DynamicQuestionnairesTable
                         $newRecord = $record->replicate();
                         $newRecord->title = $record->title . ' (Copy)';
                         $newRecord->slug = $record->slug . '-copy-' . time();
-                        $newRecord->push();
+                        $newRecord->save();
                     }),
                     
                 DeleteAction::make()
@@ -127,7 +126,7 @@ class DynamicQuestionnairesTable
                 ]),
             ])
             ->emptyStateActions([
-                CreateAction::make()
+                \Filament\Actions\CreateAction::make()
                     ->icon('heroicon-o-plus')
                     ->label('Create First Questionnaire'),
             ])
