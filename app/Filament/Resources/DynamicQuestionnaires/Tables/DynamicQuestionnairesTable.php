@@ -89,9 +89,9 @@ class DynamicQuestionnairesTable
                     ->icon('heroicon-o-eye')
                     ->color('success')
                     ->url(fn (DynamicQuestionnaire $record): string => 
-                        route('api.questionnaire.show', $record->slug)
-                    )
-                    ->openUrlInNewTab(),
+                        '/api/questionnaire/' . $record->slug
+                            )
+                ->openUrlInNewTab(),
                     
                 Action::make('duplicate')
                     ->label('Duplicate')
